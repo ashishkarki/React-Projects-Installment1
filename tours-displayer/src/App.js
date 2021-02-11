@@ -16,7 +16,7 @@ function App() {
       const tours = await response.json()
 
       setLoading(false)
-      setTours(tours.slice(0, 1))
+      setTours(tours)
     } catch (error) {
       setLoading(false)
       console.log("error fetching api response..", error)
