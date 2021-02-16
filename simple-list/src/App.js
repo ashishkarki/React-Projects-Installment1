@@ -2,9 +2,19 @@ import React, { useState, useEffect } from 'react'
 import List from './List'
 import Alert from './Alert'
 
+const getLocalStorage = () => {
+  let itemList = localStorage.getItem('itemList')
+
+  if (itemList) {
+    return JSON.parse(itemList)
+  } else {
+    return []
+  }
+}
+
 function App() {
   const [ itemName, setItemName ] = useState('')
-  const [ itemList, setItemList ] = useState([])
+  const [ itemList, setItemList ] = useState(getLocalStorage())
   const [ isEdit, setIsEdit ] = useState(false)
   const [ editIndex, setEditIndex ] = useState(null)
   const [ alert, setAlert ] = useState({ show: false, msg: '', type: '' })
@@ -61,6 +71,11 @@ function App() {
     showAlert(true, 'Item removed', 'danger')
     setItemList(itemList.filter(item => item.id !== id))
   }
+
+  // save the itemList to localStorage so it survives refreshes
+  useEffect(() => {
+    localStorage.setItem('itemList', JSON.stringify(itemList))
+  }, [ itemList ])
 
   return <>
     <section className="section-center">
