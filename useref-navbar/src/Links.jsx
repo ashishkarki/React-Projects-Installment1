@@ -1,10 +1,13 @@
 import React from 'react'
 
-const Links = ({ links }) => {
+const Links = React.forwardRef((props, refs) => {
+    const { linksContainerRef, linksRef } = refs
+
+    console.log(`linksRef Links: ${ JSON.stringify(linksRef) }`)
     return (
-        <div className="links-container show-container">
-            <ul className="links">
-                { links.map((link) => {
+        <div className='links-container' ref={ linksContainerRef }>
+            <ul className="links" ref={ linksRef }>
+                { props.links.map((link) => {
                     const { id, url, text } = link
                     return (
                         <li key={ id }>
@@ -15,6 +18,6 @@ const Links = ({ links }) => {
             </ul>
         </div>
     )
-}
+})
 
 export default Links
