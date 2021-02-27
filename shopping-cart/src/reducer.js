@@ -5,6 +5,8 @@ export const ACTION_TYPES = {
     INCREASE_ITEM_COUNT: 'increase count of an item',
     DECREASE_ITEM_COUNT: 'decrease count of an item',
     GET_TOTAL_ITEMS: 'get a count of total items',
+    LOADING: 'data is getting pulled from API',
+    DISPLAY_ITEMS: 'data from API is ready to be displayed',
 }
 
 const reducer = (state, action) => {
@@ -62,8 +64,18 @@ const reducer = (state, action) => {
             totalAmount, // totalAmount: totalAmount,
             numItems, // numItems: numItems,
         }
+    } else if (action.type === ACTION_TYPES.LOADING) {
+        return {
+            ...state,
+            loading: true,
+        }
+    } else if (action.type === ACTION_TYPES.DISPLAY_ITEMS) {
+        return {
+            ...state,
+            cart: action.payload,
+            loading: false,
+        }
     }
-
 
     return state
 }

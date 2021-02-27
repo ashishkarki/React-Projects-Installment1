@@ -42,6 +42,35 @@ const AppProvider = ({ children }) => {
         })
     }
 
+    const fetchData = async () => {
+        dispatch({
+            type: ACTION_TYPES.LOADING
+        })
+
+        const response = await fetch(url)
+        const cart = await response.json()
+
+        let localizedCart = []
+        cart.forEach(cartItem => {
+            localizedCart.push({
+                id: cartItem.id,
+                title: cartItem.title,
+                totalAmount: cartItem.price,
+                img: cartItem.img,
+                numItems: cartItem.amount
+            })
+        })
+
+        dispatch({
+            type: ACTION_TYPES.DISPLAY_ITEMS,
+            payload: localizedCart,
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     useEffect(() => {
         dispatch({
             type: ACTION_TYPES.GET_TOTAL_ITEMS
