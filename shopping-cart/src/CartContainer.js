@@ -29,7 +29,8 @@ const CartContainer = () => {
         {
           cart.map((item) => {
             return <CartItem key={ item.id } { ...item } />
-          }) }
+          })
+        }
       </div>
 
       {/* cart footer */ }

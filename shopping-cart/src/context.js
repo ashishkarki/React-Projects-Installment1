@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer, useEffect } from 'react'
+import React, { useContext, useReducer, useEffect } from 'react'
 import cartItems from './data'
 import reducer, { ACTION_TYPES } from './reducer'
 
@@ -87,7 +87,7 @@ const AppProvider = ({ children }) => {
                 decreaseItems,
             } }
         >
-            {children }
+            { children }
         </AppContext.Provider>
     )
 }
